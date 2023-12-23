@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+
+  <body>
+    <script>
+    var Tabid;
+    var diceResults;
+    var count;
+    var die1Image, die2Image, die3Image, die4Image, die5Image, die6Image, die7Image, die8Image, die9Image, die10Image, die11Image, die12Image;
+    function start() {
+      var button = document.getElementById("rollButton");
+      button.addEventListener("click", rollDice);
+      die1Image = document.getElementById("die1");
+      die2Image = document.getElementById("die2");
+      die3Image = document.getElementById("die3");
+      die4Image = document.getElementById("die4");
+      die5Image = document.getElementById("die5");
+      die6Image = document.getElementById("die6");
+      die7Image = document.getElementById("die7");
+      die8Image = document.getElementById("die8");
+      die9Image = document.getElementById("die9");
+      die10Image = document.getElementById("die10");
+      die11Image = document.getElementById("die11");
+      die12Image = document.getElementById("die12");
+      count = 0;
+      diceResults = new Array(13);
+
+    }
+
+    function rollDice() {
+      count = 0;
+      setImage(die1Image);
+      setImage(die2Image);
+      setImage(die3Image);
+      setImage(die4Image);
+      setImage(die5Image);
+      setImage(die6Image);
+      setImage(die7Image);
+      setImage(die8Image);
+      setImage(die9Image);
+      setImage(die10Image);
+      setImage(die11Image);
+      setImage(die12Image);
+      updateFrequencyTable();
+
+    }
+
+    function setImage(dieImg) {
+      var dieValue = Math.floor(1 + Math.random() * 6);
+      count = count + 1;
+      diceResults[count] = dieValue;
+      dieImg.setAttribute("src", "die" + dieValue + ".png");
+      dieImg.setAttribute("alt", "die image with" + dieValue + "spot(s)");
+
+    }
+
+    window.onload = start;
+
+
+    function updateFrequencyTable() {
+      var tmp;
+      var id;
+      Tabid = new Array(7);
+      for (i = 1; i < Tabid.length; i++) {
+        Tabid[i] = 0;
+      }
+      for (i = 1; i < diceResults.length; i++) {
+        id = diceResults[i];
+        temp = Tabid[id];
+        Tabid[id] = temp + 1;
+      }
+      showtable();
+    }
+
+    function showtable() {
+      var tab = document.getElementById("border");
+      for (i = 1; i < Tabid.length; i++) {
+        let row = tab.rows[i];
+        let c1 = row.cells[1];
+        c1.innerText=Math.round(Tabid[i]/12*1000)/10;
+      }
+  
+    }
+
+
+  </script>
+    <img id="die1" src="die1.png" alt="blank image">
+    <img id="die2" src="die1.png" alt="blank image">
+    <img id="die3" src="die1.png" alt="blank image">
+    <img id="die4" src="die1.png" alt="blank image">
+    <img id="die5" src="die1.png" alt="blank image">
+    <img id="die6" src="die1.png" alt="blank image">
+    <p></p>
+    <img id="die7" src="die1.png" alt="blank image">
+    <img id="die8" src="die1.png" alt="blank image">
+    <img id="die9" src="die1.png" alt="blank image">
+    <img id="die10" src="die1.png" alt="blank image">
+    <img id="die11" src="die1.png" alt="blank image">
+    <img id="die12" src="die1.png" alt="blank image">
+
+    <form action="#">
+      <input id="rollButton" type="button" value="Roll Dice">
+    </form>
+
+    <table id="border" border="1">
+      <thead>
+        <th>Face</th>
+        <th>Percent</th>
+      </thead>
+      <tr>
+        <td> 1 </td>
+        <td> 0 </td>
+      </tr>
+      <tr>
+        <td> 2 </td>
+        <td> 0 </td>
+      </tr>
+      <tr>
+        <td> 3 </td>
+        <td> 0 </td>
+      </tr>
+      <tr>
+        <td> 4 </td>
+        <td> 0 </td>
+      </tr>
+      <tr>
+        <td>5 </td>
+        <td> 0 </td>
+      </tr>
+      <tr>
+        <td> 6 </td>
+        <td> 0 </td>
+      </tr>
+    </table>
+
+  </body>
+
+</html>
